@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    font-family: Georgia, 'Times New Roman', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .scrollable {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+  .scrollable::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollable::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollable::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 3px;
+  }
+
+  .a4-sheet {
+    width: 210mm;
+    /* Altura fixa de página A4. Conteúdo que ultrapassa é movido
+       para a próxima página pelo sistema de paginação. */
+    height: 297mm;
+    padding: 20mm;
+    background: #ffffff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .braille-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    transition: background-color 0.1s ease;
+  }
+  .braille-dot--raised {
+    background-color: #1e293b;
+  }
+  .braille-dot--flat {
+    background-color: #e2e8f0;
+  }
+
+  .braille-cell {
+    display: inline-grid;
+    grid-template-columns: 6px 6px;
+    grid-template-rows: 6px 6px 6px;
+    column-gap: 4px;
+    row-gap: 3px;
+    margin-right: 3px;
+    vertical-align: middle;
+  }
+
+  .braille-space {
+    display: inline-block;
+    width: 10px;
+    vertical-align: middle;
+  }
+
+  .editor-textarea {
+    width: 100%;
+    /* Ocupa exatamente a área de conteúdo: 297mm − 2×20mm = 257mm */
+    height: calc(297mm - 40mm);
+    resize: none;
+    outline: none;
+    border: none;
+    background: transparent;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #1e293b;
+    caret-color: #3b82f6;
+    /* Permite scroll momentâneo durante a re-paginação */
+    overflow-y: auto;
+  }
+  .editor-textarea::placeholder {
+    color: #94a3b8;
+  }
+}
